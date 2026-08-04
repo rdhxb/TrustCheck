@@ -46,10 +46,18 @@
 			<scope>test</scope>
 		</dependency>
 
+<!--		geting pdfs from web scraping -->
 		<dependency>
 			<groupId>com.microsoft.playwright</groupId>
 			<artifactId>playwright</artifactId>
 			<version>1.61.0</version>
+		</dependency>
+
+<!--		reading pdfs-->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.8</version>
 		</dependency>
 	</dependencies>
 
