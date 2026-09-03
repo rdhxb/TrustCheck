@@ -8,6 +8,7 @@
 		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>rdhxb</groupId>
 	<artifactId>TrustCheck</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -28,6 +29,7 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<jaxws.version>4.0.5</jaxws.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +48,8 @@
 			<scope>test</scope>
 		</dependency>
 
+
+
 <!--		geting pdfs from web scraping -->
 		<dependency>
 			<groupId>com.microsoft.playwright</groupId>
@@ -58,6 +62,13 @@
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 			<version>3.0.8</version>
+		</dependency>
+
+		<!-- SOAP / JAX-WS runtime (CRBR) -->
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>${jaxws.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -107,6 +118,30 @@
 									<artifactId>lombok</artifactId>
 								</path>
 							</annotationProcessorPaths>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>${jaxws.version}</version>
+				<executions>
+					<execution>
+						<id>crbr-wsimport</id>
+						<phase>generate-sources</phase>
+						<goals><goal>wsimport</goal></goals>
+						<configuration>
+							<extension>true</extension>
+							<packageName>pl.gov.mf.crbr.client</packageName>
+							<wsdlDirectory>${project.basedir}/src/main/resources/wsdl</wsdlDirectory>
+							<wsdlFiles>
+								<wsdlFile>ApiPrzegladoweCRBR.wsdl</wsdlFile>
+							</wsdlFiles>
+							<wsdlLocation>/wsdl/ApiPrzegladoweCRBR.wsdl</wsdlLocation>
+							<keep>true</keep>
+							<sourceDestDir>${project.build.directory}/generated-sources/wsimport</sourceDestDir>
 						</configuration>
 					</execution>
 				</executions>
