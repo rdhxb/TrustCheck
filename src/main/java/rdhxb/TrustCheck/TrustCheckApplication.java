@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import rdhxb.TrustCheck.krs.KrsClient;
+import rdhxb.TrustCheck.sudop.SudopClient;
 import rdhxb.TrustCheck.whiteList.WlClient;
 
 @SpringBootApplication
@@ -17,8 +18,8 @@ public class TrustCheckApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(KrsClient client){
-		return args -> client.getData();
+	CommandLineRunner runner(SudopClient sudopClient){
+		return args -> sudopClient.getData();
 	}
 
 }
